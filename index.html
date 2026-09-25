@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="FinPulse — a payment gateway concept built for speed, clarity, and developer ergonomics. Real-time ledger, glassmorphic dashboards, honest sample data.">
+  <meta name="theme-color" content="#0b1220">
+  <title>FinPulse — Payments infrastructure, rendered in real time</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ TICKER BAR ============ -->
+  <div class="ticker" role="status" aria-label="Sample network activity ticker">
+    <span class="ticker__label">LIVE SANDBOX</span>
+    <div class="ticker__viewport" aria-hidden="true">
+      <ul class="ticker__track" id="tickerTrack">
+        <li><span class="tk-ok">SETTLED</span> <span class="tk-id">txn_9f3a1c</span> EUR 142.00 <span class="tk-lat">83ms</span></li>
+        <li><span class="tk-ok">SETTLED</span> <span class="tk-id">txn_2be704</span> USD 1,204.50 <span class="tk-lat">61ms</span></li>
+        <li><span class="tk-warn">REVIEW</span> <span class="tk-id">txn_5cd992</span> GBP 89.99 <span class="tk-lat">—</span></li>
+        <li><span class="tk-ok">SETTLED</span> <span class="tk-id">txn_71aa38</span> JPY 15,000 <span class="tk-lat">97ms</span></li>
+        <li><span class="tk-err">DECLINED</span> <span class="tk-id">txn_0e12fb</span> USD 320.00 <span class="tk-lat">42ms</span></li>
+        <li><span class="tk-ok">SETTLED</span> <span class="tk-id">txn_44d8e1</span> SGD 56.20 <span class="tk-lat">74ms</span></li>
+        <li><span class="tk-ok">SETTLED</span> <span class="tk-id">txn_6c2f0b</span> CAD 410.00 <span class="tk-lat">88ms</span></li>
+        <li><span class="tk-info">REFUND</span> <span class="tk-id">re_118ab3</span> EUR 29.90 <span class="tk-lat">55ms</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="wrap site-header__inner">
+      <a class="brand" href="#" aria-label="FinPulse home">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13h4l3-8 4 14 3-8h6"/></svg>
+        </span>
+        <span class="brand__name">FinPulse</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#dashboard">Dashboard</a>
+        <a href="#features">Platform</a>
+        <a href="#how">Flow</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <div class="site-header__cta">
+        <a class="btn btn--ghost" href="#pricing">Docs</a>
+        <a class="btn btn--primary" href="#pricing">Start in sandbox</a>
+      </div>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
+      <a href="#dashboard">Dashboard</a>
+      <a href="#features">Platform</a>
+      <a href="#how">Flow</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero__grid-bg" aria-hidden="true"></div>
+      <div class="wrap hero__inner">
+        <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span> Studio concept build &middot; sandbox data only</p>
+        <h1 class="hero__title">Payments infrastructure,<br><em>rendered in real time.</em></h1>
+        <p class="hero__sub">FinPulse is a concept payment gateway: one ledger, every currency you actually sell in, and a dashboard that refreshes before your coffee does. Built rails-first — SDKs for the languages your team ships in.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" href="#dashboard">Explore the mock dashboard</a>
+          <a class="btn btn--outline btn--lg" href="#how">See the request flow</a>
+        </div>
+        <div class="hero__stats" role="list" aria-label="Design targets, illustrative only">
+          <div role="listitem" class="stat"><span class="stat__num mono">&lt;120ms</span><span class="stat__lbl">p95 authorize target</span></div>
+          <div role="listitem" class="stat"><span class="stat__num mono">137</span><span class="stat__lbl">currencies modeled</span></div>
+          <div role="listitem" class="stat"><span class="stat__num mono">9 APIs</span><span class="stat__lbl">core resource surface</span></div>
+        </div>
+        <div class="hero__code mono" aria-label="Example API call, illustrative">
+          <div class="code-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="code-bar__file">charge.ts</span></div>
+<pre><code><span class="c-key">const</span> pulse = <span class="c-fn">FinPulse</span>(<span class="c-str">"sk_sandbox_…"</span>);
+<span class="c-key">await</span> pulse.charges.<span class="c-fn">create</span>({
+  amount: <span class="c-num">4200</span>,            <span class="c-com">// cents, minor units</span>
+  currency: <span class="c-str">"eur"</span>,
+  capture: <span class="c-str">"automatic"</span>,
+});  <span class="c-com">// → txn_9f3a1c &middot; settled in 83ms</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DASHBOARD MOCK ============ -->
+    <section class="section" id="dashboard">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker mono">// 01 — the cockpit</p>
+          <h2>A dashboard that thinks like a ledger</h2>
+          <p class="section__lede">Glassmorphic panels over a dense, keyboard-navigable table. Every row below is <strong>sample data generated for this concept</strong> — no real transactions, customers, or funds are shown.</p>
+        </header>
+
+        <div class="dash reveal" role="img" aria-label="Mock payment dashboard showing balance cards, a chart, and a sample transaction table">
+          <div class="dash__chrome">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="dash__url mono">sandbox.finpulse.dev/overview</span>
+            <span class="dash__badge mono">SAMPLE&nbsp;DATA</span>
+          </div>
+          <div class="dash__body">
+            <aside class="dash__side" aria-hidden="true">
+              <span class="dash__side-item is-active">Overview</span>
+              <span class="dash__side-item">Transactions</span>
+              <span class="dash__side-item">Payouts</span>
+              <span class="dash__side-item">Disputes</span>
+              <span class="dash__side-item">Developers</span>
+            </aside>
+            <div class="dash__main">
+              <div class="dash__cards">
+                <div class="gcard">
+                  <p class="gcard__label mono">GROSS VOLUME &middot; 30D</p>
+                  <p class="gcard__value mono">€ 812,460.22</p>
+                  <p class="gcard__delta gcard__delta--up">+12.4% vs prior</p>
+                </div>
+                <div class="gcard">
+                  <p class="gcard__label mono">SUCCESS RATE</p>
+                  <p class="gcard__value mono">98.1%</p>
+                  <div class="gcard__bar" aria-hidden="true"><i style="width:98.1%"></i></div>
+                </div>
+                <div class="gcard">
+                  <p class="gcard__label mono">PENDING PAYOUT</p>
+                  <p class="gcard__value mono">€ 24,911.05</p>
+                  <p class="gcard__delta">settles 04:00 UTC</p>
+                </div>
+              </div>
+
+              <div class="gcard gcard--chart" aria-hidden="true">
+                <p class="gcard__label mono">AUTHORIZATION LATENCY &middot; P95 / P50</p>
+                <svg viewBox="0 0 600 120" preserveAspectRatio="none" class="chart">
+                  <defs>
+                    <linearGradient id="fillA" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#5eead4" stop-opacity="0.35"/>
+                      <stop offset="100%" stop-color="#5eead4" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <g class="chart__grid"><line x1="0" y1="30" x2="600" y2="30"/><line x1="0" y1="60" x2="600" y2="60"/><line x1="0" y1="90" x2="600" y2="90"/></g>
+                  <path class="chart__area" d="M0,86 40,80 80,88 120,70 160,76 200,64 240,72 280,58 320,66 360,52 400,60 440,46 480,54 520,42 560,50 600,38 600,120 0,120 Z" fill="url(#fillA)"/>
+                  <polyline class="chart__line chart__line--p95" points="0,86 40,80 80,88 120,70 160,76 200,64 240,72 280,58 320,66 360,52 400,60 440,46 480,54 520,42 560,50 600,38"/>
+                  <polyline class="chart__line chart__line--p50" points="0,102 40,99 80,104 120,96 160,100 200,94 240,98 280,92 320,96 360,90 400,95 440,88 480,93 520,86 560,91 600,85"/>
+                </svg>
+              </div>
+
+              <div class="gcard gcard--table">
+                <div class="table-head">
+                  <p class="gcard__label mono">RECENT TRANSACTIONS</p>
+                  <div class="seg" role="group" aria-label="Filter sample transactions">
+                    <button class="seg__btn is-active" data-filter="all">All</button>
+                    <button class="seg__btn" data-filter="settled">Settled</button>
+                    <button class="seg__btn" data-filter="review">Review</button>
+                    <button class="seg__btn" data-filter="declined">Declined</button>
+                  </div>
+                </div>
+                <div class="table-scroll">
+                  <table class="tx" id="txTable">
+                    <caption class="sr-only">Sample transaction list generated for this concept build</caption>
+                    <thead>
+                      <tr><th scope="col">ID</th><th scope="col">Created</th><th scope="col" class="tx__num">Amount</th><th scope="col">Method</th><th scope="col">Status</th><th scope="col" class="tx__num">Latency</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr data-status="settled"><td class="mono">txn_9f3a1c</td><td class="mono dim">14:02:11</td><td class="tx__num mono">EUR 142.00</td><td>card &middot; visa ••4242</td><td><span class="pill pill--ok">settled</span></td><td class="tx__num mono">83ms</td></tr>
+                      <tr data-status="settled"><td class="mono">txn_2be704</td><td class="mono dim">14:01:57</td><td class="tx__num mono">USD 1,204.50</td><td>bank &middot; ach</td><td><span class="pill pill--ok">settled</span></td><td class="tx__num mono">61ms</td></tr>
+                      <tr data-status="review"><td class="mono">txn_5cd992</td><td class="mono dim">13:58:31</td><td class="tx__num mono">GBP 89.99</td><td>card &middot; mc ••8810</td><td><span class="pill pill--warn">review</span></td><td class="tx__num mono">—</td></tr>
+                      <tr data-status="settled"><td class="mono">txn_71aa38</td><td class="mono dim">13:57:02</td><td class="tx__num mono">JPY 15,000</td><td>wallet &middot; generic</td><td><span class="pill pill--ok">settled</span></td><td class="tx__num mono">97ms</td></tr>
+                      <tr data-status="declined"><td class="mono">txn_0e12fb</td><td class="mono dim">13:52:44</td><td class="tx__num mono">USD 320.00</td><td>card &middot; amex ••1005</td><td><span class="pill pill--err">declined</span></td><td class="tx__num mono">42ms</td></tr>
+                      <tr data-status="settled"><td class="mono">txn_44d8e1</td><td class="mono dim">13:50:19</td><td class="tx__num mono">SGD 56.20</td><td>card &middot; visa ••3391</td><td><span class="pill pill--ok">settled</span></td><td class="tx__num mono">74ms</td></tr>
+                      <tr data-status="settled"><td class="mono">re_118ab3</td><td class="mono dim">13:47:55</td><td class="tx__num mono">-EUR 29.90</td><td>refund &middot; original</td><td><span class="pill pill--info">refund</span></td><td class="tx__num mono">55ms</td></tr>
+                      <tr data-status="review"><td class="mono">txn_6c2f0b</td><td class="mono dim">13:41:12</td><td class="tx__num mono">CAD 410.00</td><td>bank &middot; sepa</td><td><span class="pill pill--warn">pending</span></td><td class="tx__num mono">88ms</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="section section--alt" id="features">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker mono">// 02 — platform surface</p>
+          <h2>Nine resources. Zero mystery.</h2>
+        </header>
+        <div class="feat-grid">
+          <article class="feat reveal">
+            <div class="feat__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 15h4"/></svg></div>
+            <h3>Charges &amp; Intents</h3>
+            <p>One-call charges for simple checkouts, PaymentIntents for flows needing 3DS or step-up auth. Minor-unit math everywhere — no floating-point surprises.</p>
+            <p class="mono feat__api">POST /v1/charges</p>
+          </article>
+          <article class="feat reveal">
+            <div class="feat__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg></div>
+            <h3>Unified ledger</h3>
+            <p>Every movement — auth, capture, refund, dispute, fee — is a row in one append-only ledger. Reconciliation stops being a monthly archaeology dig.</p>
+            <p class="mono feat__api">GET /v1/ledger?since=…</p>
+          </article>
+          <article class="feat reveal">
+            <div class="feat__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 17l6-6-6-6M12 19h8"/></svg></div>
+            <h3>SDKs that mirror the API</h3>
+            <p>TypeScript, Python, Go, Ruby, PHP. Identical resource names across languages so a backend swap doesn't rewrite your mental model.</p>
+            <p class="mono feat__api">npm i @finpulse/sdk</p>
+          </article>
+          <article class="feat reveal">
+            <div class="feat__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2L4 14h6l-1 8 9-12h-6l1-8z"/></svg></div>
+            <h3>Webhooks with replay</h3>
+            <p>Signed, ordered per-object, and re-playable from the dashboard for 72 hours. Missed events stop being a support ticket.</p>
+            <p class="mono feat__api">Webhook-Signature: v1,…</p>
+          </article>
+          <article class="feat reveal">
+            <div class="feat__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
+            <h3>Sandbox parity</h3>
+            <p>The sandbox runs the same state machine as the design target for production — same errors, same latency histograms, same test card matrix.</p>
+            <p class="mono feat__api">sk_sandbox_… / pk_sandbox_…</p>
+          </article>
+          <article class="feat reveal">
+            <div class="feat__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg></div>
+            <h3>Payouts, scheduled</h3>
+            <p>Daily, weekly, or rolling with a visible settlement calendar per currency. Every payout links back to the exact ledger rows funding it.</p>
+            <p class="mono feat__api">GET /v1/payouts/schedule</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section class="section" id="how">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker mono">// 03 — request anatomy</p>
+          <h2>What happens between “Pay now” and “settled”</h2>
+        </header>
+        <ol class="flow">
+          <li class="flow__step reveal">
+            <span class="flow__n mono">01</span>
+            <div><h3>Tokenize at the edge</h3><p>Card data never touches your server. The client SDK swaps the PAN for a single-use token in your user's browser region.</p></div>
+            <div class="flow__meter" aria-hidden="true"><span class="mono">≈12ms</span><i style="--w:12%"></i></div>
+          </li>
+          <li class="flow__step reveal">
+            <span class="flow__n mono">02</span>
+            <div><h3>Authorize</h3><p>FinPulse routes the intent to the issuer, applies your risk rules synchronously, and returns an outcome: settled, review, or declined — with a reason code a human can read.</p></div>
+            <div class="flow__meter" aria-hidden="true"><span class="mono">≈78ms</span><i style="--w:78%"></i></div>
+          </li>
+          <li class="flow__step reveal">
+            <span class="flow__n mono">03</span>
+            <div><h3>Ledger + webhook</h3><p>The outcome is written to the append-only ledger and pushed to your endpoint, signed, within the same second. Your dashboard is already showing it.</p></div>
+            <div class="flow__meter" aria-hidden="true"><span class="mono">≈8ms</span><i style="--w:8%"></i></div>
+          </li>
+          <li class="flow__step reveal">
+            <span class="flow__n mono">04</span>
+            <div><h3>Settle &amp; payout</h3><p>Captured funds follow the settlement calendar for their currency. Each payout arrives with a CSV of the ledger rows behind it.</p></div>
+            <div class="flow__meter" aria-hidden="true"><span class="mono">T+1 (modeled)</span><i style="--w:52%"></i></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ PRICING ============ -->
+    <section class="section section--alt" id="pricing">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker mono">// 04 — pricing sketch</p>
+          <h2>Transparent by default</h2>
+          <p class="section__lede">Illustrative pricing for this concept — not a commercial offer.</p>
+        </header>
+        <div class="price-grid">
+          <article class="plan reveal">
+            <h3 class="plan__name">Sandbox</h3>
+            <p class="plan__price mono"><span>$0</span>/forever</p>
+            <p class="plan__blurb">Full API surface, test cards, webhook replay. No card required to poke at it.</p>
+            <ul class="plan__list">
+              <li>All 9 core resources</li><li>Test card matrix + failure injection</li><li>72h webhook replay window</li><li>Community support</li>
+            </ul>
+            <a class="btn btn--outline btn--block" href="#faq">Read the docs</a>
+          </article>
+          <article class="plan plan--featured reveal">
+            <span class="plan__flag mono">DESIGN TARGET</span>
+            <h3 class="plan__name">Launch</h3>
+            <p class="plan__price mono"><span>2.4% + $0.25</span>/successful charge</p>
+            <p class="plan__blurb">Everything in Sandbox, plus live routing and settlement calendars.</p>
+            <ul class="plan__list">
+              <li>Human-readable decline reasons</li><li>Ledger exports (CSV / JSON)</li><li>Two webhook targets per event</li><li>Email support, 1 business day</li>
+            </ul>
+            <a class="btn btn--primary btn--block" href="#faq">Prototype a migration</a>
+          </article>
+          <article class="plan reveal">
+            <h3 class="plan__name">Scale</h3>
+            <p class="plan__price mono"><span>Talk to us</span></p>
+            <p class="plan__blurb">For volume that makes per-transaction math silly.</p>
+            <ul class="plan__list">
+              <li>Blended or interchange++ sketching</li><li>Multi-entity ledger consolidation</li><li>Private routing rules &amp; sandbox region</li><li>Named engineer, not a queue</li>
+            </ul>
+            <a class="btn btn--outline btn--block" href="#faq">Request a fit review</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section" id="faq">
+      <div class="wrap wrap--narrow">
+        <header class="section__head reveal">
+          <p class="kicker mono">// 05 — honest questions</p>
+          <h2>FAQ</h2>
+        </header>
+        <div class="faq-list reveal">
+          <details>
+            <summary>Is FinPulse a real payment provider?</summary>
+            <div class="faq__a"><p>No — this is a studio concept build. The dashboards, latency figures, and pricing are design exercises using clearly-labeled sample data. No money moves anywhere.</p></div>
+          </details>
+          <details>
+            <summary>Why show latencies at all if they're fictional?</summary>
+            <div class="faq__a"><p>Because the point of the concept is that payment UIs should be honest about time. Every number here is labeled as a design target or sample value, and the ticker explicitly says “LIVE SANDBOX / SAMPLE DATA”.</p></div>
+          </details>
+          <details>
+            <summary>What was the hardest part to design?</summary>
+            <div class="faq__a"><p>The decline state. Everyone designs success screens; a ledger-first dashboard has to make failure readable — reason codes, retry paths, and review queues in the same visual weight as settled payments.</p></div>
+          </details>
+          <details>
+            <summary>How is the dashboard built?</summary>
+            <div class="faq__a"><p>Pure HTML and CSS — glassmorphic panels are layered <code>backdrop-filter</code> surfaces, the chart is inline SVG, and the table filter uses ~30 lines of vanilla JS. No frameworks, no chart libraries.</p></div>
+          </details>
+          <details>
+            <summary>Can I reuse the design approach?</summary>
+            <div class="faq__a"><p>The source is public on GitHub — study it, fork it, adapt it. If you build something adjacent, the agency would like to hear about it.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section class="cta-band">
+      <div class="wrap cta-band__inner reveal">
+        <h2>Ship the cockpit before the rocket.</h2>
+        <p>Good payment tooling starts with a dashboard you'd trust at 3am. This is what that looks like as a concept.</p>
+        <a class="btn btn--primary btn--lg" href="#dashboard">Replay the mock dashboard</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="wrap site-footer__grid">
+      <div>
+        <a class="brand" href="#" aria-label="FinPulse home">
+          <span class="brand__mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13h4l3-8 4 14 3-8h6"/></svg></span>
+          <span class="brand__name">FinPulse</span>
+        </a>
+        <p class="site-footer__note">A concept payment-gateway product. All data shown is synthetic.</p>
+      </div>
+      <nav aria-label="Footer — product"><h3>Product</h3><a href="#features">Platform</a><a href="#dashboard">Dashboard</a><a href="#how">Request flow</a><a href="#pricing">Pricing sketch</a></nav>
+      <nav aria-label="Footer — resources"><h3>Resources</h3><a href="#faq">FAQ</a><a href="#features">API surface</a><a href="#how">Latency model</a></nav>
+      <nav aria-label="Footer — agency"><h3>Built by</h3><a href="https://nexapulsestudio.netlify.app" rel="noopener">NexaPulse Studio</a><a href="https://github.com/siddharth446/finpulse-payments-site" rel="noopener">Source on GitHub</a></nav>
+    </div>
+    <div class="wrap site-footer__legal">
+      <p>A studio concept build by <a href="https://nexapulsestudio.netlify.app" rel="noopener">NexaPulse Studio</a> — not a live client project. <a href="https://github.com/siddharth446/finpulse-payments-site" rel="noopener">View source on GitHub.</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
